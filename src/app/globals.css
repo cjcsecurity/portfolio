@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #07080f;
+  --bg-surface: #0e1019;
+  --bg-surface-hover: #151724;
+  --fg: #e2e4ed;
+  --fg-dim: #8b8fa3;
+  --accent: #cdff64;
+  --accent-dim: #7a993c;
+  --accent-glow: rgba(205, 255, 100, 0.12);
+  --border: #1e2035;
+  --border-hover: #2d3055;
+  --grid-line: rgba(205, 255, 100, 0.04);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-surface-hover: var(--bg-surface-hover);
+  --color-fg: var(--fg);
+  --color-fg-dim: var(--fg-dim);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-glow: var(--accent-glow);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --font-display: var(--font-syne);
+  --font-body: var(--font-outfit);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ── Noise / grain overlay ─────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ── Grid background pattern ───────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ── Geometric accent line ─────────────────────── */
+.accent-line {
+  position: relative;
+}
+.accent-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+/* ── Glow effect on hover ──────────────────────── */
+.glow-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glow-card:hover {
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 30px -10px var(--accent-glow), inset 0 1px 0 var(--accent-glow);
+}
+
+/* ── Scroll reveal ────────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Keep scroll-reveal visible when JS is disabled */
+@media (scripting: none) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Hero text entrance ────────────────────────── */
+@keyframes text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px) skewY(2deg);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) skewY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-text-reveal {
+  animation: text-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Scan-line effect (hero only) ──────────────── */
+.scan-lines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(205, 255, 100, 0.015) 2px,
+    rgba(205, 255, 100, 0.015) 4px
+  );
+}
+
+/* ── Badge category colors ─────────────────────── */
+.badge-security-tool {
+  border-color: rgba(205, 255, 100, 0.3);
+  color: rgba(205, 255, 100, 0.85);
+  background: rgba(205, 255, 100, 0.08);
+}
+.badge-automation {
+  border-color: rgba(52, 211, 153, 0.3);
+  color: rgba(52, 211, 153, 0.85);
+  background: rgba(52, 211, 153, 0.08);
+}
+.badge-extension {
+  border-color: rgba(167, 139, 250, 0.3);
+  color: rgba(167, 139, 250, 0.85);
+  background: rgba(167, 139, 250, 0.08);
+}
+.badge-web-app {
+  border-color: rgba(251, 191, 36, 0.3);
+  color: rgba(251, 191, 36, 0.85);
+  background: rgba(251, 191, 36, 0.08);
+}
+
+/* ── Section heading ───────────────────────────── */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent-dim), transparent);
+}

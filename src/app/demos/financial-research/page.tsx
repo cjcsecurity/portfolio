@@ -163,8 +163,9 @@ export default function FinancialResearchPage() {
     let i = 0;
     const tick = () => {
       if (i < LOG_EVENTS.length) {
-        setLogLines((prev) => [...prev, LOG_EVENTS[i]]);
+        const event = LOG_EVENTS[i];
         i++;
+        setLogLines((prev) => [...prev, event]);
         timerRef.current = setTimeout(tick, 400);
       } else {
         setIsRunning(false);

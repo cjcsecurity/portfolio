@@ -42,7 +42,7 @@ const IP_PLATFORMS: Platform[] = [
   { name: "VirusTotal", description: "Multi-engine antivirus scan results", url: (v) => `https://www.virustotal.com/gui/ip-address/${v}` },
   { name: "Shodan", description: "Internet-connected device search engine", url: (v) => `https://www.shodan.io/host/${v}` },
   { name: "GreyNoise", description: "Internet background noise analysis", url: (v) => `https://viz.greynoise.io/ip/${v}` },
-  { name: "Censys", description: "Internet-wide scan data and certificates", url: (v) => `https://censys.io/ipv4/${v}` },
+  { name: "Censys", description: "Internet-wide scan data and certificates", url: (v) => `https://search.censys.io/hosts/${v}` },
   { name: "AlienVault OTX", description: "Open threat intelligence community", url: (v) => `https://otx.alienvault.com/indicator/ip/${v}` },
   { name: "IBM X-Force", description: "Threat intelligence sharing platform", url: (v) => `https://exchange.xforce.ibmcloud.com/ip/${v}` },
   { name: "Talos Intelligence", description: "Cisco threat intelligence and reputation", url: (v) => `https://talosintelligence.com/reputation_center/lookup?search=${v}` },
@@ -91,6 +91,7 @@ function getPlatforms(type: IndicatorType): { platforms: Platform[]; accent: str
 const SAMPLES = [
   { value: "8.8.8.8", label: "IPv4" },
   { value: "44d88612fea8a8f36de82e1278abb02f", label: "MD5" },
+  { value: "da39a3ee5e6b4b0d3255bfef95601890afd80709", label: "SHA-1" },
   { value: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", label: "SHA-256" },
   { value: "example.com", label: "Domain" },
 ];
@@ -200,7 +201,7 @@ export default function OsintLookupPage() {
           OSINT Lookup Tool
         </h1>
         <p className="mt-3 text-fg-dim text-sm sm:text-base max-w-2xl leading-relaxed">
-          Paste any indicator to generate lookup links across 27 threat
+          Paste any indicator to generate lookup links across 25+ threat
           intelligence platforms
         </p>
       </header>

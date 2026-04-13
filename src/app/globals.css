@@ -171,6 +171,16 @@ body::before {
   color: rgba(251, 191, 36, 0.85);
   background: rgba(251, 191, 36, 0.08);
 }
+.badge-dashboard {
+  border-color: rgba(34, 211, 238, 0.3);
+  color: rgba(34, 211, 238, 0.85);
+  background: rgba(34, 211, 238, 0.08);
+}
+.badge-ml-project {
+  border-color: rgba(251, 113, 133, 0.3);
+  color: rgba(251, 113, 133, 0.85);
+  background: rgba(251, 113, 133, 0.08);
+}
 
 /* ── Section heading ───────────────────────────── */
 .section-heading {

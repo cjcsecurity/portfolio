@@ -9,6 +9,8 @@ const categoryLabels: Record<Project["category"], string> = {
   automation: "Automation",
   extension: "Extension",
   "web-app": "Web App",
+  dashboard: "Dashboard",
+  "ml-project": "ML / AI",
 };
 
 const accentStripColors: Record<Project["category"], string> = {
@@ -16,6 +18,8 @@ const accentStripColors: Record<Project["category"], string> = {
   automation: "bg-emerald-400",
   extension: "bg-violet-400",
   "web-app": "bg-amber-400",
+  dashboard: "bg-cyan-400",
+  "ml-project": "bg-rose-400",
 };
 
 export default function ProjectsPage() {
@@ -97,6 +101,18 @@ export default function ProjectsPage() {
                       </div>
                     </div>
                   </div>
+
+                  {project.demoUrl && (
+                    <div className="mt-6 pt-6 border-t border-border">
+                      <Link
+                        href={project.demoUrl}
+                        className="inline-flex items-center gap-2 border border-accent text-accent rounded-lg px-5 py-2.5 font-mono text-sm hover:bg-accent hover:text-bg transition-all duration-300"
+                      >
+                        View Interactive Demo
+                        <span className="text-xs">&#x2192;</span>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </article>
             </ScrollReveal>

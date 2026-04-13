@@ -147,7 +147,8 @@ export interface Project {
   description: string;
   details: string[];
   tech: string[];
-  category: "security-tool" | "automation" | "extension" | "web-app";
+  category: "security-tool" | "automation" | "extension" | "web-app" | "dashboard" | "ml-project";
+  demoUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -229,5 +230,79 @@ export const projects: Project[] = [
     ],
     tech: ["Python", "Okta API", "Google Workspace / GAM"],
     category: "automation",
+  },
+  {
+    name: "Bitcoin Buy/Sell Signal Dashboard",
+    description:
+      "Client-side Bitcoin trading signal dashboard using an ensemble scoring system — aggregates technical indicators, on-chain metrics, and market sentiment from multiple free APIs into a single buy/sell score with configurable risk tolerance.",
+    details: [
+      "Ensemble scoring from 4 sub-models: Momentum, Trend, Sentiment, On-Chain",
+      "Client-side RSI, MACD, Bollinger Bands, and SMA calculations",
+      "Configurable risk tolerance (Conservative / Balanced / Aggressive)",
+      "Real-time data from CoinGecko, Mempool, Fear & Greed Index, and more",
+      "SVG gauge visualization with confidence metrics",
+    ],
+    tech: ["JavaScript", "Chart.js", "Tailwind CSS", "CoinGecko API", "Mempool API"],
+    category: "dashboard",
+    demoUrl: "/demos/btc-dashboard",
+  },
+  {
+    name: "OSINT Lookup Tool",
+    description:
+      "Chrome extension and interactive web tool for security analysts — paste any IP address, file hash, or domain to instantly generate lookup links across 27+ OSINT platforms with automatic indicator type detection.",
+    details: [
+      "Auto-detects indicator type: IPv4, IPv6, MD5, SHA-1, SHA-256, SHA-512, domain",
+      "Generates links to 27 OSINT platforms (VirusTotal, Shodan, AbuseIPDB, etc.)",
+      "Color-coded grouping: blue for IPs, red for hashes, green for domains",
+      "One-click submission to any.run sandbox for URL analysis",
+    ],
+    tech: ["Chrome Extension APIs", "JavaScript", "Regex Validation", "OSINT Platforms"],
+    category: "security-tool",
+    demoUrl: "/demos/osint-lookup",
+  },
+  {
+    name: "Financial Research Agent",
+    description:
+      "Multi-agent stock screening and analysis platform — automated pipeline screens for swing trade candidates, runs technical/fundamental/sentiment analysis through specialized AI agents, and tracks paper trading performance.",
+    details: [
+      "Multi-agent pipeline: screener → analyst → risk manager → portfolio manager",
+      "Swing trade setup cards with entry/target/stop prices and R/R ratios",
+      "Walk-forward backtesting with win rate and drawdown metrics",
+      "Paper trading portfolio with real-time P&L tracking",
+      "Streaming progress log showing pipeline execution in real time",
+    ],
+    tech: ["React", "FastAPI", "LangGraph", "Anthropic API", "OpenBB SDK"],
+    category: "web-app",
+    demoUrl: "/demos/financial-research",
+  },
+  {
+    name: "Threadlytic",
+    description:
+      "AI-powered wardrobe management app — upload clothing photos for automatic tagging via vision AI, browse and filter your closet, and get outfit recommendations through a client-side matching algorithm that scores compatibility by color, formality, season, and style.",
+    details: [
+      "Vision AI auto-tags uploaded clothing (category, color, season, formality)",
+      "Client-side outfit matching algorithm with multi-factor scoring",
+      "Search, filter, and curate wardrobe items",
+      "AI stylist chat with persona selection",
+      "Demo mode with read-only wardrobe browsing",
+    ],
+    tech: ["Next.js", "React", "Supabase", "OpenRouter Vision API", "Tailwind CSS"],
+    category: "web-app",
+    demoUrl: "/demos/threadlytic",
+  },
+  {
+    name: "Pac-Man ML",
+    description:
+      "Reinforcement learning environment for training a DQN agent to play Ms. Pac-Man — includes a live training dashboard with WebSocket-streamed game frames, real-time metrics, and interactive controls.",
+    details: [
+      "DeepMind-style DQN with 4-frame stacking and experience replay",
+      "Live game rendering via WebSocket-streamed frames",
+      "Real-time training metrics: score, epsilon, loss, rolling averages",
+      "Pause/resume training controls with full state persistence",
+      "Playable browser demo with keyboard controls",
+    ],
+    tech: ["Python", "PyTorch", "FastAPI", "Gymnasium (Atari)", "Chart.js"],
+    category: "ml-project",
+    demoUrl: "/demos/pacman-ml",
   },
 ];

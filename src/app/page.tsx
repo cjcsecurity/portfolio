@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import {
   profile,
@@ -10,7 +9,19 @@ import {
 } from "@/data/profile";
 import type { Job, Skill } from "@/data/profile";
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { RotatingTitle } from "@/components/rotating-title";
+import { getVariant } from "@/config/variants";
+
+const variant = getVariant();
+
+// Sort skills according to the active variant — AI Tools first on the AI-SWE
+// site, security first on the cybersec/prodsec sites, unlisted categories go
+// to the bottom.
+const orderedSkills: Skill[] = [
+  ...variant.skillsOrder
+    .map((cat) => skills.find((s) => s.category === cat))
+    .filter((s): s is Skill => Boolean(s)),
+  ...skills.filter((s) => !variant.skillsOrder.includes(s.category)),
+];
 
 /* ── Helper components ─────────────────────────────── */
 
@@ -88,7 +99,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 w-full pt-28 pb-20">
           {/* decorative mono label */}
           <p className="font-mono text-fg-dim text-sm mb-8 animate-text-reveal">
-            {"// cybersecurity engineer"}
+            {`// ${variant.heroTitle.toLowerCase()}`}
           </p>
 
           {/* terminal cursor */}
@@ -115,33 +126,20 @@ export default function Home() {
             </span>
           </h1>
 
-          {/* title — rotates between target roles, or pins via ?focus=cybersec|prodsec|ai-swe */}
-          <Suspense
-            fallback={
-              <p
-                className="text-accent font-mono text-xl mt-4 animate-text-reveal"
-                style={{ animationDelay: "600ms" }}
-              >
-                {profile.title}
-              </p>
-            }
+          {/* title — static per variant (each site commits to one role) */}
+          <p
+            className="text-accent font-mono text-xl mt-4 animate-text-reveal"
+            style={{ animationDelay: "600ms" }}
           >
-            <RotatingTitle
-              titles={profile.titleRotation}
-              className="text-accent font-mono text-xl mt-4 animate-text-reveal"
-              style={{ animationDelay: "600ms" }}
-            />
-          </Suspense>
-          <noscript>
-            <p className="text-accent font-mono text-xl mt-4">{profile.title}</p>
-          </noscript>
+            {variant.heroTitle}
+          </p>
 
           {/* tagline */}
           <p
             className="text-fg-dim max-w-xl text-lg font-body leading-relaxed mt-6 animate-text-reveal"
             style={{ animationDelay: "750ms" }}
           >
-            {profile.tagline}
+            {variant.tagline}
           </p>
 
           {/* CTA buttons */}
@@ -217,37 +215,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── How I Work ────────────────────────────── */}
-      <section id="how-i-work" className="py-24 max-w-6xl mx-auto px-6">
-        <ScrollReveal>
-          <SectionHeading>How I Work</SectionHeading>
-        </ScrollReveal>
+      {/* ── How I Work (AI-SWE site only) ─────────── */}
+      {variant.showHowIWork && (
+        <section id="how-i-work" className="py-24 max-w-6xl mx-auto px-6">
+          <ScrollReveal>
+            <SectionHeading>How I Work</SectionHeading>
+          </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
-          <div className="md:col-span-3 space-y-6">
-            <ScrollReveal delay={100}>
-              <h3 className="font-display text-2xl text-fg leading-snug">
-                {howIWork.heading}
-              </h3>
-            </ScrollReveal>
-            {howIWork.paragraphs.map((p, i) => (
-              <ScrollReveal key={i} delay={150 + i * 100}>
-                <p className="text-fg-dim leading-relaxed">{p}</p>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
+            <div className="md:col-span-3 space-y-6">
+              <ScrollReveal delay={100}>
+                <h3 className="font-display text-2xl text-fg leading-snug">
+                  {howIWork.heading}
+                </h3>
               </ScrollReveal>
-            ))}
-          </div>
+              {howIWork.paragraphs.map((p, i) => (
+                <ScrollReveal key={i} delay={150 + i * 100}>
+                  <p className="text-fg-dim leading-relaxed">{p}</p>
+                </ScrollReveal>
+              ))}
+            </div>
 
-          <div className="md:col-span-2">
-            <ScrollReveal delay={200}>
-              <blockquote className="accent-line pl-6">
-                <p className="font-display text-xl text-fg leading-snug">
-                  &ldquo;{howIWork.pullQuote}&rdquo;
-                </p>
-              </blockquote>
-            </ScrollReveal>
+            <div className="md:col-span-2">
+              <ScrollReveal delay={200}>
+                <blockquote className="accent-line pl-6">
+                  <p className="font-display text-xl text-fg leading-snug">
+                    &ldquo;{howIWork.pullQuote}&rdquo;
+                  </p>
+                </blockquote>
+              </ScrollReveal>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Experience ────────────────────────────── */}
       <section id="experience" className="py-24 max-w-6xl mx-auto px-6">
@@ -269,7 +269,7 @@ export default function Home() {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-          {skills.map((skill, i) => (
+          {orderedSkills.map((skill, i) => (
             <SkillCategory key={skill.category} skill={skill} index={i} />
           ))}
         </div>
@@ -356,6 +356,26 @@ export default function Home() {
               LinkedIn
             </a>
           </div>
+        </div>
+
+        {/* Cross-site variant links */}
+        <div className="max-w-6xl mx-auto px-6 mt-8 pt-6 border-t border-border/40">
+          <p className="text-fg-dim/60 font-mono text-[11px] text-center">
+            {`// this is the ${variant.heroTitle.toLowerCase()} version — also available: `}
+            {variant.crossLinks.map((link, i) => (
+              <span key={link.url}>
+                <a
+                  href={link.url}
+                  className="hover:text-accent transition-colors underline underline-offset-2 decoration-dotted"
+                >
+                  {link.label}
+                </a>
+                {i < variant.crossLinks.length - 1 && (
+                  <span className="text-fg-dim/30">{" · "}</span>
+                )}
+              </span>
+            ))}
+          </p>
         </div>
       </footer>
     </main>

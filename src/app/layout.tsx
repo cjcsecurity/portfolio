@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, Outfit, JetBrains_Mono } from "next/font/google";
 import { Nav } from "@/components/nav";
+import { getVariant } from "@/config/variants";
 import "./globals.css";
 
 const syne = Syne({
@@ -20,28 +21,27 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const variant = getVariant();
+
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : variant.url);
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "CJ Clark — Cybersecurity Engineer",
-  description:
-    "CJ Clark — Cybersecurity Engineer. Internal security tools, automation, and AI projects.",
+  title: variant.metaTitle,
+  description: variant.metaDescription,
   openGraph: {
-    title: "CJ Clark — Cybersecurity Engineer",
-    description:
-      "Internal security tools, automation, and AI projects — plus 5 interactive demos.",
+    title: variant.metaTitle,
+    description: variant.ogDescription,
     url: "/",
     siteName: "CJ Clark",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CJ Clark — Cybersecurity Engineer",
-    description:
-      "Internal security tools, automation, and AI projects — plus 5 interactive demos.",
+    title: variant.metaTitle,
+    description: variant.ogDescription,
   },
   robots: { index: true, follow: true },
 };

@@ -1,8 +1,23 @@
 import Link from "next/link";
 import { projects, type Project } from "@/data/profile";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { getVariant } from "@/config/variants";
 
-export const metadata = { title: "Projects — CJ Clark" };
+const variant = getVariant();
+
+export const metadata = { title: `Projects — ${variant.metaTitle}` };
+
+// Sort projects by the variant's category order — AI projects first on the
+// AI-SWE site, security-tools first on the cybersec/prodsec sites.
+const orderedProjects: Project[] = [...projects].sort((a, b) => {
+  const ai = variant.projectCategoryOrder.indexOf(a.category);
+  const bi = variant.projectCategoryOrder.indexOf(b.category);
+  const aRank = ai === -1 ? Number.MAX_SAFE_INTEGER : ai;
+  const bRank = bi === -1 ? Number.MAX_SAFE_INTEGER : bi;
+  if (aRank !== bRank) return aRank - bRank;
+  // preserve original order within a category
+  return projects.indexOf(a) - projects.indexOf(b);
+});
 
 const categoryLabels: Record<Project["category"], string> = {
   "security-tool": "Security Tool",
@@ -46,7 +61,7 @@ export default function ProjectsPage() {
         </header>
 
         <div className="space-y-8">
-          {projects.map((project, i) => (
+          {orderedProjects.map((project, i) => (
             <ScrollReveal key={project.name} delay={i * 80}>
               <article className="bg-bg-surface border border-border rounded-xl overflow-hidden glow-card">
                 <div className={`h-1 ${accentStripColors[project.category]}`} />

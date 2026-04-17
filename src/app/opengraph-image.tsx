@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
+import { getVariant } from "@/config/variants";
 
-export const alt = "CJ Clark — Cybersecurity Engineer";
+const variant = getVariant();
+
+export const alt = variant.metaTitle;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +51,9 @@ export default async function OpenGraphImage() {
           }}
         >
           <span>{">_|"}</span>
-          <span style={{ color: "#8b8fa3" }}>// cybersecurity engineer</span>
+          <span style={{ color: "#8b8fa3" }}>
+            {`// ${variant.ogSubtitle.toLowerCase()}`}
+          </span>
         </div>
 
         {/* Middle: name + title */}
@@ -80,7 +85,7 @@ export default async function OpenGraphImage() {
               display: "flex",
             }}
           >
-            Cybersecurity Engineer
+            {variant.ogSubtitle}
           </div>
           <div
             style={{
@@ -91,8 +96,7 @@ export default async function OpenGraphImage() {
               display: "flex",
             }}
           >
-            Security tools, automation, and AI projects — with 5 interactive
-            demos.
+            {variant.ogDescription}
           </div>
         </div>
 

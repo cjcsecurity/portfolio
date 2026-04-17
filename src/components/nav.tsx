@@ -3,9 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 
+// NEXT_PUBLIC_* is inlined at build time, so this reads the active variant
+// baked into each deployment.
+const showHowIWork = process.env.NEXT_PUBLIC_SITE_VARIANT === "ai-swe";
+
 const links = [
   { href: "/#about", label: "ABOUT" },
-  { href: "/#how-i-work", label: "HOW I WORK" },
+  ...(showHowIWork
+    ? [{ href: "/#how-i-work", label: "HOW I WORK" }]
+    : []),
   { href: "/#experience", label: "EXPERIENCE" },
   { href: "/#skills", label: "SKILLS" },
   { href: "/projects", label: "PROJECTS", isRoute: true },

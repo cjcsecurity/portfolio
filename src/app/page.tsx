@@ -145,6 +145,14 @@ export default function Home() {
             >
               Get in Touch
             </a>
+            <a
+              href="/cj-clark-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-border text-fg-dim rounded-lg px-6 py-3 font-mono text-sm hover:text-accent hover:border-accent-dim transition-all duration-300"
+            >
+              Download Resume
+            </a>
           </div>
         </div>
 
@@ -279,6 +287,14 @@ export default function Home() {
           </p>
 
           <div className="flex items-center gap-6">
+            <a
+              href="/cj-clark-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-fg-dim hover:text-accent transition-colors text-sm font-mono"
+            >
+              Resume
+            </a>
             <a
               href={profile.links.github}
               target="_blank"

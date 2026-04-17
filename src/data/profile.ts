@@ -11,7 +11,7 @@ export const profile = {
   email: "christianjclark92@gmail.com",
   location: "Colorado Springs, CO",
   links: {
-    github: "https://github.com/staycold666",
+    github: "https://github.com/cjcsecurity",
     linkedin: "https://linkedin.com/in/christianclark-9b9606204",
   },
 } as const;
@@ -39,7 +39,7 @@ export const experience: Job[] = [
   {
     company: "Snapdocs",
     title: "Cybersecurity Engineer",
-    period: "Apr 2024 — 2025",
+    period: "Apr 2024 — Present",
     highlights: [
       "Built internal threat intel pipeline: AlienVault OTX → IoC extraction → Splunk query generation → AI-written environmental impact reports auto-created as Jira tickets",
       "Created web app for Kandji Mac app governance — inventories installed apps, auto-flags malicious or non-work software, generates reports, one-click app blocking",

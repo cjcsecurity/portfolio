@@ -108,7 +108,7 @@ export default async function OpenGraphImage() {
           }}
         >
           <span>christianjclark92@gmail.com</span>
-          <span style={{ color: "#cdff64" }}>github.com/staycold666</span>
+          <span style={{ color: "#cdff64" }}>github.com/cjcsecurity</span>
         </div>
       </div>
     ),

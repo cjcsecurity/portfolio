@@ -2,11 +2,11 @@ export const profile = {
   name: "CJ Clark",
   title: "Cybersecurity Engineer",
   tagline:
-    "Building internal tools, automation, and AI-driven workflows that keep remote-first teams secure without slowing them down.",
+    "I build security tools and automation so teams can move fast without cutting corners on security.",
   about: [
-    "I'm a Cybersecurity Engineer who grew out of hands-on IT and systems work. My career has taken me from e-commerce operations to systems administration to security engineering — and at every step, I've been the person building tools to make security practical, not painful.",
-    "I specialize in turning messy, manual security processes into something repeatable, measurable, and as push-button as possible. Whether it's automating threat intel pipelines, building app governance dashboards, or standing up phishing education programs, I focus on making the secure path the easiest path.",
-    "I'm also recognized internally as our company's AI expert — advising senior leadership on emerging tools, introducing AI coding agents to engineering teams, and writing the policies that govern safe AI adoption across the organization.",
+    "I started in IT and systems administration, worked my way into security, and kept building tools the whole time. At every job I've ended up being the person who scripts away the tedious stuff so the team can focus on actual problems.",
+    "Most of my day-to-day is automating things that used to be manual: threat intel pipelines, vulnerability reporting, access reviews, phishing campaigns. If a security process involves copying and pasting between three tabs, I'd rather write something that does it in one click.",
+    "I'm also the go-to person at my company for AI. I advise leadership on what tools are worth adopting, help engineering teams get started with AI coding agents, and wrote our AI usage policy.",
   ],
   email: "cj@example.com",
   // Add your real links here
@@ -155,13 +155,12 @@ export const projects: Project[] = [
   {
     name: "Threat Intel Pipeline",
     description:
-      "Automated threat intelligence platform that ingests AlienVault OTX pulses, extracts IoCs, generates Splunk queries, checks the environment for matches, and uses AI to produce custom environmental impact reports — auto-created as Jira tickets.",
+      "Pulls threat intel from AlienVault OTX, extracts IoCs, builds Splunk queries to check if we're affected, and has an LLM write up impact reports that get dropped into Jira automatically.",
     details: [
-      "Ingests threat intelligence feeds from AlienVault OTX in real time",
-      "Extracts and normalizes Indicators of Compromise (IoCs)",
-      "Auto-generates Splunk queries to check for environmental matches",
-      "AI writes custom environmental impact or threat intel reports",
-      "Reports are automatically created as Jira tickets for triage",
+      "Ingests AlienVault OTX feeds and pulls out IoCs",
+      "Generates Splunk queries to check our environment for matches",
+      "LLM writes environmental impact reports per threat",
+      "Reports auto-created as Jira tickets for the team to triage",
     ],
     tech: ["Python", "AlienVault OTX API", "Splunk", "AI/LLM", "Jira API"],
     category: "security-tool",
@@ -169,12 +168,12 @@ export const projects: Project[] = [
   {
     name: "Mac App Governance Dashboard",
     description:
-      "Web application that pulls installed app inventories from all managed Macs via Kandji, auto-flags malicious or non-work-appropriate apps, generates machine-level reports, and enables one-click app blocking.",
+      "Web app that inventories every app installed across our Mac fleet via Kandji, flags anything sketchy or unapproved, and lets you block it in one click.",
     details: [
-      "Pulls full app inventories from Kandji MDM across the fleet",
-      "Auto-flags apps that are malicious, unapproved, or non-work-related",
-      "Generates per-machine reports for compliance review",
-      "One-click blocking of flagged apps directly through Kandji",
+      "Pulls app inventories from Kandji across the whole fleet",
+      "Flags malicious, unapproved, or non-work apps automatically",
+      "Per-machine reports for compliance reviews",
+      "One-click blocking through Kandji",
     ],
     tech: ["Python", "Kandji API", "Web Framework", "REST APIs"],
     category: "web-app",
@@ -182,12 +181,12 @@ export const projects: Project[] = [
   {
     name: "OSINT Chrome Extension",
     description:
-      "Published Chrome extension for security analysts — highlight an IP address or SHA hash on any page to instantly query multiple OSINT platforms, or send suspicious links to an any.run sandbox for analysis.",
+      "Chrome extension I published for our analysts. Highlight an IP or hash on any page, right-click, and it opens lookups across a bunch of OSINT platforms. You can also send URLs straight to any.run.",
     details: [
-      "Context-menu and highlight-driven OSINT lookups",
-      "Queries multiple threat intelligence platforms simultaneously",
-      "One-click submission of URLs to any.run sandbox",
-      "Built for speed during incident investigations",
+      "Right-click any IP or hash to query OSINT platforms",
+      "Hits multiple threat intel sources at once",
+      "One-click URL submission to any.run sandbox",
+      "Made to be fast during incident response",
     ],
     tech: ["Chrome Extension APIs", "OSINT Platform APIs", "any.run API", "JavaScript"],
     category: "extension",
@@ -195,12 +194,12 @@ export const projects: Project[] = [
   {
     name: "Automated Offboarding Pipeline",
     description:
-      "Zero-touch employee offboarding system triggered by a Jira ticket — immediately revokes access from all critical systems, ensuring no lingering permissions after separation.",
+      "When someone leaves the company, a Jira ticket fires off automated access revocation across every system. No manual steps, no forgotten accounts.",
     details: [
-      "Triggered automatically by a Jira Service Desk ticket",
-      "Revokes access across Okta, Google Workspace, and all integrated apps",
-      "Immediate execution — no manual steps or delays",
-      "Audit trail maintained for compliance",
+      "Triggered by a Jira Service Desk ticket",
+      "Kills access in Okta, Google Workspace, and connected apps",
+      "Runs immediately with no manual intervention",
+      "Full audit trail for compliance",
     ],
     tech: ["Jira API", "Okta API", "Google Workspace", "Python"],
     category: "automation",
@@ -208,12 +207,12 @@ export const projects: Project[] = [
   {
     name: "Cloudflare IP Blocklist Action",
     description:
-      "GitHub Action that allows the security team to add or remove IPs from a Cloudflare Terraform-managed block list through a simple PR workflow.",
+      "GitHub Action so the security team can add or remove IPs from our Cloudflare block list by opening a PR. Terraform handles the rest.",
     details: [
-      "GitHub Action for easy IP block list management",
-      "Integrates with Terraform-managed Cloudflare configuration",
-      "PR-based workflow for audit trail and approval",
-      "Used by security team for rapid threat response",
+      "Simple PR workflow to manage blocked IPs",
+      "Terraform applies changes to Cloudflare automatically",
+      "PR approval gives you a built-in audit trail",
+      "Security team uses it for quick threat response",
     ],
     tech: ["GitHub Actions", "Terraform", "Cloudflare API"],
     category: "automation",
@@ -221,12 +220,12 @@ export const projects: Project[] = [
   {
     name: "Automated Access Reviews",
     description:
-      "Automated periodic access review system for Okta and Google Workspace — generates reports on user access levels, flags anomalies, and streamlines the review cycle.",
+      "Scripts that run our periodic access reviews for Okta and Google Workspace. Generates the reports, flags anything that looks off, and cuts what used to take days down to minutes.",
     details: [
-      "Automated scheduled access reviews for Okta and Google Workspace",
-      "Generates comprehensive access reports",
-      "Flags anomalous or excessive permissions",
-      "Reduces manual review effort from days to minutes",
+      "Scheduled access reviews for Okta and Google Workspace",
+      "Generates access reports automatically",
+      "Flags excessive or unusual permissions",
+      "Turned a multi-day manual process into minutes",
     ],
     tech: ["Python", "Okta API", "Google Workspace / GAM"],
     category: "automation",
@@ -234,13 +233,13 @@ export const projects: Project[] = [
   {
     name: "Bitcoin Buy/Sell Signal Dashboard",
     description:
-      "Client-side Bitcoin trading signal dashboard using an ensemble scoring system — aggregates technical indicators, on-chain metrics, and market sentiment from multiple free APIs into a single buy/sell score with configurable risk tolerance.",
+      "Bitcoin trading signal dashboard that pulls from free APIs and scores buy/sell signals based on technicals, on-chain data, and sentiment. You can adjust risk tolerance and everything runs client-side.",
     details: [
-      "Ensemble scoring from 4 sub-models: Momentum, Trend, Sentiment, On-Chain",
-      "Client-side RSI, MACD, Bollinger Bands, and SMA calculations",
-      "Configurable risk tolerance (Conservative / Balanced / Aggressive)",
-      "Real-time data from CoinGecko, Mempool, Fear & Greed Index, and more",
-      "SVG gauge visualization with confidence metrics",
+      "Scores from 4 categories: momentum, trend, sentiment, on-chain",
+      "RSI, MACD, Bollinger Bands, SMA all calculated in the browser",
+      "Risk tolerance toggle: conservative, balanced, aggressive",
+      "Data from CoinGecko, Mempool, Fear & Greed Index, etc.",
+      "SVG gauge with confidence scoring",
     ],
     tech: ["JavaScript", "Chart.js", "Tailwind CSS", "CoinGecko API", "Mempool API"],
     category: "dashboard",
@@ -249,12 +248,12 @@ export const projects: Project[] = [
   {
     name: "OSINT Lookup Tool",
     description:
-      "Chrome extension and interactive web tool for security analysts — paste any IP address, file hash, or domain to instantly generate lookup links across 27+ OSINT platforms with automatic indicator type detection.",
+      "Paste an IP, hash, or domain and get one-click lookup links to 27+ OSINT platforms. Auto-detects what you pasted and opens the right tools.",
     details: [
-      "Auto-detects indicator type: IPv4, IPv6, MD5, SHA-1, SHA-256, SHA-512, domain",
-      "Generates links to 27 OSINT platforms (VirusTotal, Shodan, AbuseIPDB, etc.)",
-      "Color-coded grouping: blue for IPs, red for hashes, green for domains",
-      "One-click submission to any.run sandbox for URL analysis",
+      "Auto-detects IPv4, IPv6, MD5, SHA-1, SHA-256, SHA-512, and domains",
+      "Links to 27 platforms: VirusTotal, Shodan, AbuseIPDB, and more",
+      "Color-coded by type: blue for IPs, red for hashes, green for domains",
+      "Send URLs to any.run sandbox in one click",
     ],
     tech: ["Chrome Extension APIs", "JavaScript", "Regex Validation", "OSINT Platforms"],
     category: "security-tool",
@@ -263,13 +262,13 @@ export const projects: Project[] = [
   {
     name: "Financial Research Agent",
     description:
-      "Multi-agent stock screening and analysis platform — automated pipeline screens for swing trade candidates, runs technical/fundamental/sentiment analysis through specialized AI agents, and tracks paper trading performance.",
+      "A pipeline of AI agents that screens stocks for swing trades. One agent finds candidates, another analyzes them, a risk manager validates, and a portfolio manager outputs the final picks. Includes paper trading.",
     details: [
-      "Multi-agent pipeline: screener → analyst → risk manager → portfolio manager",
-      "Swing trade setup cards with entry/target/stop prices and R/R ratios",
-      "Walk-forward backtesting with win rate and drawdown metrics",
-      "Paper trading portfolio with real-time P&L tracking",
-      "Streaming progress log showing pipeline execution in real time",
+      "Pipeline: screener, analyst, risk manager, portfolio manager",
+      "Trade cards with entry/target/stop and risk-reward ratios",
+      "Backtesting with win rate and drawdown stats",
+      "Paper trading portfolio with P&L tracking",
+      "Live progress log as the pipeline runs",
     ],
     tech: ["React", "FastAPI", "LangGraph", "Anthropic API", "OpenBB SDK"],
     category: "web-app",
@@ -278,13 +277,13 @@ export const projects: Project[] = [
   {
     name: "Threadlytic",
     description:
-      "AI-powered wardrobe management app — upload clothing photos for automatic tagging via vision AI, browse and filter your closet, and get outfit recommendations through a client-side matching algorithm that scores compatibility by color, formality, season, and style.",
+      "Wardrobe app where you upload clothing photos and a vision model tags them automatically. Then a matching algorithm scores outfit combinations by color, formality, and season.",
     details: [
-      "Vision AI auto-tags uploaded clothing (category, color, season, formality)",
-      "Client-side outfit matching algorithm with multi-factor scoring",
-      "Search, filter, and curate wardrobe items",
-      "AI stylist chat with persona selection",
-      "Demo mode with read-only wardrobe browsing",
+      "Vision AI tags clothing by category, color, season, and formality",
+      "Matching algorithm scores outfit compatibility",
+      "Search and filter your wardrobe",
+      "Chat with an AI stylist (pick a persona)",
+      "Demo mode lets you browse without an account",
     ],
     tech: ["Next.js", "React", "Supabase", "OpenRouter Vision API", "Tailwind CSS"],
     category: "web-app",
@@ -293,13 +292,13 @@ export const projects: Project[] = [
   {
     name: "Pac-Man ML",
     description:
-      "Reinforcement learning environment for training a DQN agent to play Ms. Pac-Man — includes a live training dashboard with WebSocket-streamed game frames, real-time metrics, and interactive controls.",
+      "RL environment where a DQN agent learns to play Ms. Pac-Man. You can watch it train live in the browser or play the game yourself.",
     details: [
-      "DeepMind-style DQN with 4-frame stacking and experience replay",
-      "Live game rendering via WebSocket-streamed frames",
-      "Real-time training metrics: score, epsilon, loss, rolling averages",
-      "Pause/resume training controls with full state persistence",
-      "Playable browser demo with keyboard controls",
+      "DQN with 4-frame stacking and experience replay",
+      "Game frames streamed to the browser over WebSocket",
+      "Training metrics: score, epsilon, loss, rolling averages",
+      "Pause/resume with full state persistence",
+      "Play it yourself with keyboard controls",
     ],
     tech: ["Python", "PyTorch", "FastAPI", "Gymnasium (Atari)", "Chart.js"],
     category: "ml-project",

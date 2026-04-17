@@ -20,10 +20,30 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "CJ Clark — Cybersecurity Engineer",
   description:
-    "Portfolio of CJ Clark — Cybersecurity Engineer specializing in internal tools, automation, and AI-driven security workflows.",
+    "CJ Clark — Cybersecurity Engineer. Internal security tools, automation, and AI projects.",
+  openGraph: {
+    title: "CJ Clark — Cybersecurity Engineer",
+    description:
+      "Internal security tools, automation, and AI projects — plus 5 interactive demos.",
+    url: "/",
+    siteName: "CJ Clark",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CJ Clark — Cybersecurity Engineer",
+    description:
+      "Internal security tools, automation, and AI projects — plus 5 interactive demos.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

@@ -196,7 +196,7 @@ export default function FinancialResearchPage() {
           Financial Research Agent
         </h1>
         <p className="text-fg-dim mt-1">
-          Multi-agent stock screening and swing trade analysis
+          AI agents screen stocks and build swing trade setups
         </p>
       </div>
 

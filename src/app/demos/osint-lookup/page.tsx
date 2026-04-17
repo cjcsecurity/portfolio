@@ -201,8 +201,8 @@ export default function OsintLookupPage() {
           OSINT Lookup Tool
         </h1>
         <p className="mt-3 text-fg-dim text-sm sm:text-base max-w-2xl leading-relaxed">
-          Paste any indicator to generate lookup links across 25+ threat
-          intelligence platforms
+          Paste an IP, hash, or domain to get lookup links for 25+ threat
+          intel platforms
         </p>
       </header>
 

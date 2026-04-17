@@ -187,11 +187,11 @@ export default function ThreadlyticDemo() {
           Threadlytic
         </h1>
         <p className="text-fg-dim max-w-2xl text-lg leading-relaxed">
-          AI-powered wardrobe management with smart outfit matching
+          Wardrobe manager with outfit matching. Pick items and see what goes together.
         </p>
         <div className="inline-flex items-center gap-2 rounded-lg border border-accent/20 bg-accent/5 px-3 py-1.5 text-sm text-accent">
           <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse" />
-          Demo Mode — Browse the closet and try the matching algorithm
+          Demo Mode — Browse the closet and try matching
         </div>
       </header>
 

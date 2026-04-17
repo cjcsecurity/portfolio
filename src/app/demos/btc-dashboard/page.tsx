@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 
 /* ── helpers ─────────────────────────────────────── */
 
@@ -34,6 +34,24 @@ interface MockData {
   subScores: { momentum: number; trend: number; sentiment: number; onChain: number };
   confidence: number;
 }
+
+// Deterministic seed used for SSR and first client render — avoids React hydration
+// mismatch (error #418) that would otherwise be triggered by Math.random() running
+// on both the server and the client. After mount, useEffect replaces this with
+// real randomized data.
+const SEED_DATA: MockData = {
+  btcPrice: 73245.8,
+  sma50: 68450.3,
+  fearGreed: 28,
+  rsi: 34.2,
+  macdBullish: true,
+  bollingerPos: "Middle Band",
+  mempoolCongestion: "Medium",
+  networkTx: 385420,
+  volume24h: 28.4,
+  subScores: { momentum: 15, trend: 18, sentiment: 8, onChain: 17 },
+  confidence: 72,
+};
 
 function generateMock(): MockData {
   const momentum = rand(15, 0.15);
@@ -234,9 +252,13 @@ function Spinner() {
 /* ── Page ─────────────────────────────────────────── */
 
 export default function BtcDashboardPage() {
-  const [data, setData] = useState<MockData>(generateMock);
+  const [data, setData] = useState<MockData>(SEED_DATA);
   const [risk, setRisk] = useState<Risk>("balanced");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setData(generateMock());
+  }, []);
 
   const raw = useMemo(() => rawScore(data), [data]);
   const score = useMemo(() => adjustedScore(raw, risk), [raw, risk]);
@@ -266,9 +288,8 @@ export default function BtcDashboardPage() {
             Bitcoin Buy/Sell Signal Dashboard
           </h1>
           <p className="mt-2 text-fg-dim text-sm max-w-xl leading-relaxed">
-            Ensemble scoring engine aggregating momentum, trend, sentiment, and
-            on-chain indicators into a single actionable signal. All data shown
-            is simulated for demonstration purposes.
+            Scores buy/sell signals from momentum, trend, sentiment, and
+            on-chain data. All data here is simulated for the demo.
           </p>
         </div>
         <button

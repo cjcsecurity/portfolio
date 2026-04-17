@@ -38,8 +38,8 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="text-fg-dim text-lg max-w-xl mt-4 font-body">
-            Internal tools and automation I&apos;ve built to solve real security
-            problems.
+            Things I&apos;ve built at work and on the side. Mostly security
+            tools and automation.
           </p>
         </header>
 

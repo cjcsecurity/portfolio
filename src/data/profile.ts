@@ -8,11 +8,11 @@ export const profile = {
     "AI Software Engineer",
   ],
   tagline:
-    "I ship security tools and AI-augmented software — from threat intel pipelines to agent-driven workflows — using AI coding agents as a core part of my practice.",
+    "I ship security tools and AI-augmented software: threat intel pipelines, agent-driven workflows, and the internal automation around them. AI coding agents are how I build.",
   about: [
     "I started in IT and systems administration, worked my way into security, and kept building tools the whole time. At every job I've ended up being the person who scripts away the tedious stuff so the team can focus on actual problems.",
-    "Most of my day-to-day is automating things that used to be manual: threat intel pipelines, vulnerability reporting, access reviews, phishing campaigns. If a security process involves copying and pasting between three tabs, I'd rather write something that does it in one click.",
-    "I'm also the go-to person at my company for AI. I advise leadership on what tools are worth adopting, help engineering teams get started with AI coding agents, and wrote our AI usage policy.",
+    "Day to day I'm automating the things that used to eat hours: threat intel pipelines, vulnerability reporting, access reviews, phishing campaigns. If a security process means clicking through three tabs, I'd rather write something that does it in one.",
+    "I'm also the go-to person at my company for AI. I advise leadership on what tools are worth adopting, onboard engineering teams to AI coding agents, and wrote our AI usage policy.",
   ],
   email: "christianjclark92@gmail.com",
   location: "Colorado Springs, CO",
@@ -35,7 +35,7 @@ export const experience: Job[] = [
     title: "Product Security Engineer",
     period: "2025 — Present",
     highlights: [
-      "Review GitHub PRs as the security team representative — security approval required before merge, focusing on authN/authZ, secrets handling, input validation, logging, and data exposure",
+      "Gate every merge as the security reviewer on GitHub — authN/authZ, secrets handling, input validation, logging, and data-exposure checks",
       "Produce and automate monthly vulnerability remediation reports tracking tickets per engineering team, SLA compliance, and open items",
       "Investigate infrastructure vulnerabilities in Wiz for AWS environments and ticket appropriate teams for remediation",
       "Leading migration from ArmorCode to Wiz Code, reworking the vulnerability ticketing pipeline across Jira projects",
@@ -52,7 +52,7 @@ export const experience: Job[] = [
       "Published a Chrome extension for OSINT — highlight IPs or SHA hashes to query multiple platforms; send links to any.run sandbox",
       "Owned end-to-end phishing training program via KnowBe4: custom templates, campaigns, reporting, repeat offender escalation, quarterly all-hands presentations",
       "Deployed and maintained DLP across four platforms: CrowdStrike, Fortinet, Code42, and Google Workspace with custom content inspection patterns",
-      "Company AI Expert — advises senior leadership, introduced AI coding agents to engineering, authored AI usage policy, runs seminars on agentic tools",
+      "Company AI Expert — advise senior leadership on AI tooling, introduced AI coding agents to engineering, authored the AI usage policy, run internal seminars on agentic tools",
       "Built custom Splunk alerts, correlation searches, and automated investigations piped into Slack",
       "Created GitHub Action for Cloudflare Terraform-managed IP block list management",
       "Automated Okta and Google Workspace access reviews",
@@ -72,7 +72,7 @@ export const experience: Job[] = [
       "Completed multiple Okta SSO integrations",
       "Automated access requests with Okta Workflows tied to Jira Service Desk",
       "Maintained ~95% SLA rate on Tier 3 support",
-      "Facilitated deployment of a new DLP program across entire Mac fleet with custom Bash scripts",
+      "Rolled out a new DLP program across the entire Mac fleet with custom Bash scripts",
       "Created and deployed Kandji blueprints and Auto Apps with custom scripts",
       "Built fleet-wide script to inventory non-Apple apps, output to spreadsheet, and flag malicious or policy-violating software",
       "Supported 100% remote workforce; assisted with zero trust network maintenance via SonicWall Cloud Secure Edge",
@@ -83,11 +83,11 @@ export const experience: Job[] = [
     title: "Systems Administrator",
     period: "Apr 2022 — Jul 2023",
     highlights: [
-      "Developed automation scripts with Python and PowerShell",
+      "Wrote Python and PowerShell automation for user provisioning, patch compliance, and asset reporting",
       "Administered hundreds of systems across Windows, macOS, iOS, and Linux",
-      "Implemented cost-saving strategies achieving ~20% budget reduction",
-      "Led creation and maintenance of VMs for dev/test and CI/CD environments",
-      "Improved asset management workflows for tracking and forecasting",
+      "Cut hardware and software costs by ~20% through renegotiations and lifecycle tracking",
+      "Created and maintained the VM fleet for dev/test and CI/CD",
+      "Rebuilt the asset management workflow for tracking and forecasting",
     ],
   },
   {
@@ -186,12 +186,12 @@ export const projects: Project[] = [
   {
     name: "Threat Intel Pipeline",
     description:
-      "Pulls threat intel from AlienVault OTX, extracts IoCs, builds Splunk queries to check if we're affected, and has an LLM write up impact reports that get dropped into Jira automatically.",
+      "Pulls threat intel from AlienVault OTX, extracts IoCs, builds Splunk queries to check the environment for matches, and has an LLM write up impact reports that get dropped into Jira automatically.",
     details: [
       "Ingests AlienVault OTX feeds and pulls out IoCs",
-      "Generates Splunk queries to check our environment for matches",
+      "Generates Splunk queries to check the environment for matches",
       "LLM writes environmental impact reports per threat",
-      "Reports auto-created as Jira tickets for the team to triage",
+      "Reports auto-created as Jira tickets for triage",
     ],
     tech: ["Python", "AlienVault OTX API", "Splunk", "AI/LLM", "Jira API"],
     category: "security-tool",
@@ -199,9 +199,9 @@ export const projects: Project[] = [
   {
     name: "Mac App Governance Dashboard",
     description:
-      "Web app that inventories every app installed across our Mac fleet via Kandji, flags anything sketchy or unapproved, and lets you block it in one click.",
+      "Web app that inventories every app installed across the Mac fleet via Kandji, flags anything sketchy or unapproved, and lets you block it in one click.",
     details: [
-      "Pulls app inventories from Kandji across the whole fleet",
+      "Pulls app inventories from Kandji across the fleet",
       "Flags malicious, unapproved, or non-work apps automatically",
       "Per-machine reports for compliance reviews",
       "One-click blocking through Kandji",
@@ -212,13 +212,13 @@ export const projects: Project[] = [
   {
     name: "OSINT Chrome Extension",
     description:
-      "Chrome extension I published for our analysts. Highlight an IP or hash on any page, right-click, and it opens lookups across a bunch of OSINT platforms. You can also send URLs straight to any.run.",
+      "Chrome extension I published to help SOC analysts move faster. Highlight an IP or hash on any page, right-click, and it opens lookups across dozens of OSINT platforms. URLs go straight to any.run with one click.",
     details: [
       "Right-click any IP or hash to query OSINT platforms",
-      "Hits multiple threat intel sources at once",
+      "Hits multiple threat intel sources in one action",
       "One-click URL submission to any.run sandbox",
-      "Made to be fast during incident response",
-      "Published to the Chrome Web Store",
+      "Built for incident-response speed",
+      "Live on the Chrome Web Store",
     ],
     tech: ["Chrome Extension APIs", "OSINT Platform APIs", "any.run API", "JavaScript"],
     category: "extension",
@@ -249,12 +249,12 @@ export const projects: Project[] = [
   {
     name: "Cloudflare IP Blocklist Action",
     description:
-      "GitHub Action so the security team can add or remove IPs from our Cloudflare block list by opening a PR. Terraform handles the rest.",
+      "GitHub Action so the security team can add or remove IPs from the Cloudflare block list by opening a PR. Terraform handles the rest.",
     details: [
       "Simple PR workflow to manage blocked IPs",
       "Terraform applies changes to Cloudflare automatically",
-      "PR approval gives you a built-in audit trail",
-      "Security team uses it for quick threat response",
+      "PR approval is the audit trail",
+      "Used for quick threat response",
     ],
     tech: ["GitHub Actions", "Terraform", "Cloudflare API"],
     category: "automation",
@@ -262,12 +262,12 @@ export const projects: Project[] = [
   {
     name: "Automated Access Reviews",
     description:
-      "Scripts that run our periodic access reviews for Okta and Google Workspace. Generates the reports, flags anything that looks off, and cuts what used to take days down to minutes.",
+      "Scripts that run periodic access reviews for Okta and Google Workspace. Generates the reports, flags anything that looks off, and turned a multi-day process into minutes.",
     details: [
       "Scheduled access reviews for Okta and Google Workspace",
-      "Generates access reports automatically",
+      "Auto-generated access reports",
       "Flags excessive or unusual permissions",
-      "Turned a multi-day manual process into minutes",
+      "Multi-day manual process down to minutes",
     ],
     tech: ["Python", "Okta API", "Google Workspace / GAM"],
     category: "automation",
@@ -304,10 +304,10 @@ export const projects: Project[] = [
   {
     name: "Financial Research Agent",
     description:
-      "A pipeline of AI agents that screens stocks for swing trades. One agent finds candidates, another analyzes them, a risk manager validates, and a portfolio manager outputs the final picks. Includes paper trading.",
+      "A multi-agent pipeline that screens stocks for swing trades. A screener surfaces candidates, an analyst breaks them down, a risk manager vetoes the junk, and a portfolio manager picks the final trades. Paper trading included.",
     details: [
-      "Pipeline: screener, analyst, risk manager, portfolio manager",
-      "Trade cards with entry/target/stop and risk-reward ratios",
+      "Pipeline: screener → analyst → risk manager → portfolio manager",
+      "Trade cards with entry, target, stop, and risk-reward ratios",
       "Backtesting with win rate and drawdown stats",
       "Paper trading portfolio with P&L tracking",
       "Live progress log as the pipeline runs",
@@ -400,8 +400,8 @@ export const howIWork = {
   heading: "AI-augmented software engineering",
   paragraphs: [
     "Using AI coding agents since 2022 — started by copy-pasting from the ChatGPT web app into VS Code before Copilot was generally available. Today I run a dedicated Claude Code machine 24/7 that executes scheduled autonomous tasks and that I control remotely over Discord.",
-    "I build with Claude Code, Cline, and Roo daily, and extend them with custom skills, agents, and MCP servers — some I authored directly, some I had Claude Code author for me against specs I wrote.",
-    "Five to six AI-augmented internal tools I built are running in production at Snapdocs today, used daily across Cybersecurity, IT, and Product Security. An independent cost estimate on one of them pegged its standalone SaaS value at roughly $50K/year.",
+    "I build with Claude Code, Cline, and Roo daily, and extend them with custom skills, agents, and MCP servers. Some I authored directly; others I specced out and had Claude Code author for me.",
+    "Five to six of my AI-augmented internal tools are running in production at Snapdocs right now, used daily across Cybersecurity, IT, and Product Security.",
   ],
   pullQuote:
     "Don't commit to a single model. Monitor benchmarks and rotate per task — engineers who settle on one model and stop looking miss half the ceiling.",

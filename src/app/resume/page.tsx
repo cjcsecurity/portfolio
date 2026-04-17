@@ -6,19 +6,19 @@ const variants = [
   {
     href: "/cj-clark-resume-cybersec.pdf",
     title: "Cybersecurity Engineer",
-    body: "SOC/SIEM depth, threat intel, DLP, phishing programs, incident response. Tuned for security operations and detection engineering roles.",
+    body: "SOC and SIEM depth, threat intel, DLP across four platforms, phishing program ownership, incident response and on-call.",
     accent: "bg-[#cdff64]",
   },
   {
     href: "/cj-clark-resume-prodsec.pdf",
     title: "Product Security Engineer",
-    body: "Secure SDLC, code review, vulnerability management, AppSec tooling (Wiz, ArmorCode), Jira-driven remediation. Tuned for product security and AppSec roles.",
+    body: "Secure SDLC, security-required PR reviews, vulnerability management, AppSec tooling (Wiz, ArmorCode), Jira-driven remediation.",
     accent: "bg-emerald-400",
   },
   {
     href: "/cj-clark-resume-ai-swe.pdf",
-    title: "AI Software Engineering",
-    body: "AI-augmented development since 2022, shipped production tools with Anthropic/OpenRouter APIs, custom MCP servers, 24/7 Claude Code harness. Tuned for AI engineering and agent-focused roles.",
+    title: "AI Software Engineer",
+    body: "AI-augmented development since 2022, production tools shipped with Anthropic and OpenRouter APIs, custom MCP servers, a 24/7 Claude Code harness.",
     accent: "bg-fuchsia-400",
   },
 ];

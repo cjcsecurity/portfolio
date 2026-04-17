@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface RotatingTitleProps {
   titles: readonly string[];
@@ -13,6 +14,16 @@ interface RotatingTitleProps {
 
 type Phase = "typing" | "hold" | "erasing";
 
+// ?focus= pins the hero title to a specific role and disables rotation,
+// so CJ can deep-link to the portfolio from a specific resume variant
+// without the rotating cycle diluting the signal.
+const FOCUS_INDEX: Record<string, number> = {
+  cybersec: 0,
+  prodsec: 1,
+  "ai-swe": 2,
+  ai: 2,
+};
+
 export function RotatingTitle({
   titles,
   className,
@@ -21,12 +32,18 @@ export function RotatingTitle({
   typeMs = 55,
   eraseMs = 32,
 }: RotatingTitleProps) {
-  const [index, setIndex] = useState(0);
-  const [display, setDisplay] = useState(titles[0]);
+  const searchParams = useSearchParams();
+  const focus = searchParams?.get("focus");
+  const pinnedIndex = focus != null ? FOCUS_INDEX[focus] : undefined;
+  const shouldCycle = pinnedIndex === undefined && titles.length > 1;
+  const startIndex = pinnedIndex ?? 0;
+
+  const [index, setIndex] = useState(startIndex);
+  const [display, setDisplay] = useState(titles[startIndex]);
   const [phase, setPhase] = useState<Phase>("hold");
 
   useEffect(() => {
-    if (titles.length <= 1) return;
+    if (!shouldCycle) return;
     let timer: number | undefined;
 
     if (phase === "hold") {
@@ -57,12 +74,12 @@ export function RotatingTitle({
     return () => {
       if (timer !== undefined) window.clearTimeout(timer);
     };
-  }, [phase, display, index, titles, holdMs, typeMs, eraseMs]);
+  }, [phase, display, index, titles, holdMs, typeMs, eraseMs, shouldCycle]);
 
   return (
     <p className={className} style={style}>
       {display}
-      <span className="animate-blink">|</span>
+      {shouldCycle && <span className="animate-blink">|</span>}
     </p>
   );
 }

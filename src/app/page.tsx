@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import {
   profile,
@@ -114,12 +115,23 @@ export default function Home() {
             </span>
           </h1>
 
-          {/* title — rotates between target roles */}
-          <RotatingTitle
-            titles={profile.titleRotation}
-            className="text-accent font-mono text-xl mt-4 animate-text-reveal"
-            style={{ animationDelay: "600ms" }}
-          />
+          {/* title — rotates between target roles, or pins via ?focus=cybersec|prodsec|ai-swe */}
+          <Suspense
+            fallback={
+              <p
+                className="text-accent font-mono text-xl mt-4 animate-text-reveal"
+                style={{ animationDelay: "600ms" }}
+              >
+                {profile.title}
+              </p>
+            }
+          >
+            <RotatingTitle
+              titles={profile.titleRotation}
+              className="text-accent font-mono text-xl mt-4 animate-text-reveal"
+              style={{ animationDelay: "600ms" }}
+            />
+          </Suspense>
           <noscript>
             <p className="text-accent font-mono text-xl mt-4">{profile.title}</p>
           </noscript>

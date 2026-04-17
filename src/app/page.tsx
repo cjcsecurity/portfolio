@@ -5,9 +5,11 @@ import {
   skills,
   education,
   certifications,
+  howIWork,
 } from "@/data/profile";
 import type { Job, Skill } from "@/data/profile";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { RotatingTitle } from "@/components/rotating-title";
 
 /* ── Helper components ─────────────────────────────── */
 
@@ -112,13 +114,15 @@ export default function Home() {
             </span>
           </h1>
 
-          {/* title */}
-          <p
+          {/* title — rotates between target roles */}
+          <RotatingTitle
+            titles={profile.titleRotation}
             className="text-accent font-mono text-xl mt-4 animate-text-reveal"
             style={{ animationDelay: "600ms" }}
-          >
-            {profile.title}
-          </p>
+          />
+          <noscript>
+            <p className="text-accent font-mono text-xl mt-4">{profile.title}</p>
+          </noscript>
 
           {/* tagline */}
           <p
@@ -145,14 +149,12 @@ export default function Home() {
             >
               Get in Touch
             </a>
-            <a
-              href="/cj-clark-resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/resume"
               className="inline-flex items-center gap-2 border border-border text-fg-dim rounded-lg px-6 py-3 font-mono text-sm hover:text-accent hover:border-accent-dim transition-all duration-300"
             >
               Download Resume
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -199,6 +201,38 @@ export default function Home() {
                 <p className="text-fg-dim leading-relaxed">{paragraph}</p>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── How I Work ────────────────────────────── */}
+      <section id="how-i-work" className="py-24 max-w-6xl mx-auto px-6">
+        <ScrollReveal>
+          <SectionHeading>How I Work</SectionHeading>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
+          <div className="md:col-span-3 space-y-6">
+            <ScrollReveal delay={100}>
+              <h3 className="font-display text-2xl text-fg leading-snug">
+                {howIWork.heading}
+              </h3>
+            </ScrollReveal>
+            {howIWork.paragraphs.map((p, i) => (
+              <ScrollReveal key={i} delay={150 + i * 100}>
+                <p className="text-fg-dim leading-relaxed">{p}</p>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <div className="md:col-span-2">
+            <ScrollReveal delay={200}>
+              <blockquote className="accent-line pl-6">
+                <p className="font-display text-xl text-fg leading-snug">
+                  &ldquo;{howIWork.pullQuote}&rdquo;
+                </p>
+              </blockquote>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -287,14 +321,12 @@ export default function Home() {
           </p>
 
           <div className="flex items-center gap-6">
-            <a
-              href="/cj-clark-resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/resume"
               className="text-fg-dim hover:text-accent transition-colors text-sm font-mono"
             >
               Resume
-            </a>
+            </Link>
             <a
               href={profile.links.github}
               target="_blank"

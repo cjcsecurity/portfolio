@@ -5,10 +5,11 @@ import Link from "next/link";
 
 const links = [
   { href: "/#about", label: "ABOUT" },
+  { href: "/#how-i-work", label: "HOW I WORK" },
   { href: "/#experience", label: "EXPERIENCE" },
   { href: "/#skills", label: "SKILLS" },
-  { href: "/#education", label: "EDUCATION" },
   { href: "/projects", label: "PROJECTS", isRoute: true },
+  { href: "/resume", label: "RESUME", isRoute: true },
 ];
 
 export function Nav() {

@@ -1,8 +1,14 @@
 export const profile = {
   name: "CJ Clark",
+  // Home page shows a rotating title; this is the fallback / SSR-initial value.
   title: "Cybersecurity Engineer",
+  titleRotation: [
+    "Cybersecurity Engineer",
+    "Product Security Engineer",
+    "AI Software Engineer",
+  ],
   tagline:
-    "I build security tools and automation so teams can move fast without cutting corners on security.",
+    "I ship security tools and AI-augmented software — from threat intel pipelines to agent-driven workflows — using AI coding agents as a core part of my practice.",
   about: [
     "I started in IT and systems administration, worked my way into security, and kept building tools the whole time. At every job I've ended up being the person who scripts away the tedious stuff so the team can focus on actual problems.",
     "Most of my day-to-day is automating things that used to be manual: threat intel pipelines, vulnerability reporting, access reviews, phishing campaigns. If a security process involves copying and pasting between three tabs, I'd rather write something that does it in one click.",
@@ -104,6 +110,23 @@ export interface Skill {
 
 export const skills: Skill[] = [
   {
+    category: "AI Tools & Agents",
+    items: [
+      "Claude Code",
+      "Cline",
+      "Roo",
+      "Cursor",
+      "Anthropic API",
+      "OpenAI API",
+      "OpenRouter",
+      "LangChain / LangGraph",
+      "MCP (Model Context Protocol)",
+      "Vercel AI SDK",
+      "Custom skills & hooks",
+      "Chroma (vector DB)",
+    ],
+  },
+  {
     category: "Security & Infrastructure",
     items: [
       "Okta (SSO, Workflows)",
@@ -147,8 +170,16 @@ export interface Project {
   description: string;
   details: string[];
   tech: string[];
-  category: "security-tool" | "automation" | "extension" | "web-app" | "dashboard" | "ml-project";
+  category:
+    | "security-tool"
+    | "automation"
+    | "extension"
+    | "web-app"
+    | "dashboard"
+    | "ml-project"
+    | "ai-project";
   demoUrl?: string;
+  announcements?: { label: string; url: string }[];
 }
 
 export const projects: Project[] = [
@@ -187,9 +218,20 @@ export const projects: Project[] = [
       "Hits multiple threat intel sources at once",
       "One-click URL submission to any.run sandbox",
       "Made to be fast during incident response",
+      "Published to the Chrome Web Store",
     ],
     tech: ["Chrome Extension APIs", "OSINT Platform APIs", "any.run API", "JavaScript"],
     category: "extension",
+    announcements: [
+      {
+        label: "Chrome Web Store →",
+        url: "https://chromewebstore.google.com/detail/osint-extension/bcjgklcpmfgkpjppcogekgkppmhmihda",
+      },
+      {
+        label: "LinkedIn announcement →",
+        url: "https://www.linkedin.com/posts/christian-clark-9b9606204_osint-lookup-chrome-extension-activity-7364419824321495041-Qwze",
+      },
+    ],
   },
   {
     name: "Automated Offboarding Pipeline",
@@ -304,6 +346,32 @@ export const projects: Project[] = [
     category: "ml-project",
     demoUrl: "/demos/pacman-ml",
   },
+  {
+    name: "DocSiphon",
+    description:
+      "RAG-powered API documentation assistant. Scrapes docs, builds a chunked vector store in Chroma, and answers natural-language queries through a multi-provider LLM factory with OpenRouter fallback — so you can swap between Claude, GPT, and open models per query.",
+    details: [
+      "LangChain + Chroma vector store with chunked embeddings",
+      "Multi-provider LLM factory with OpenRouter / LiteLLM fallback routing",
+      "Streamlit front-end for ingestion and Q&A",
+      "Configurable document loaders for HTML, PDF, and Markdown sources",
+    ],
+    tech: ["Python", "LangChain", "Chroma", "OpenRouter", "LiteLLM", "Streamlit"],
+    category: "ai-project",
+  },
+  {
+    name: "SecureCatch",
+    description:
+      "Security orchestration platform that triages reported phishing end-to-end. A Claude-powered decision engine (via OpenRouter) classifies emails, auto-enriches OSINT, and recommends SOC actions — bridging AppSec tooling with production LLM use.",
+    details: [
+      "LLM-based phishing classifier with structured JSON output and temperature-tuned determinism",
+      "Automated OSINT enrichment pipeline",
+      "SOC action recommendations per case",
+      "Prisma data layer and Next.js admin UI",
+    ],
+    tech: ["Next.js", "TypeScript", "OpenRouter", "Anthropic API", "Prisma"],
+    category: "security-tool",
+  },
 ];
 
 export interface Education {
@@ -327,3 +395,14 @@ export const certifications: string[] = [
   "CompTIA A+",
   "Google IT Automation with Python (Professional Certificate)",
 ];
+
+export const howIWork = {
+  heading: "AI-augmented software engineering",
+  paragraphs: [
+    "Using AI coding agents since 2022 — started by copy-pasting from the ChatGPT web app into VS Code before Copilot was generally available. Today I run a dedicated Claude Code machine 24/7 that executes scheduled autonomous tasks and that I control remotely over Discord.",
+    "I build with Claude Code, Cline, and Roo daily, and extend them with custom skills, agents, and MCP servers — some I authored directly, some I had Claude Code author for me against specs I wrote.",
+    "Five to six AI-augmented internal tools I built are running in production at Snapdocs today, used daily across Cybersecurity, IT, and Product Security. An independent cost estimate on one of them pegged its standalone SaaS value at roughly $50K/year.",
+  ],
+  pullQuote:
+    "Don't commit to a single model. Monitor benchmarks and rotate per task — engineers who settle on one model and stop looking miss half the ceiling.",
+};

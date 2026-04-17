@@ -11,6 +11,7 @@ const categoryLabels: Record<Project["category"], string> = {
   "web-app": "Web App",
   dashboard: "Dashboard",
   "ml-project": "ML / AI",
+  "ai-project": "AI / LLM",
 };
 
 const accentStripColors: Record<Project["category"], string> = {
@@ -20,6 +21,7 @@ const accentStripColors: Record<Project["category"], string> = {
   "web-app": "bg-amber-400",
   dashboard: "bg-cyan-400",
   "ml-project": "bg-rose-400",
+  "ai-project": "bg-fuchsia-400",
 };
 
 export default function ProjectsPage() {
@@ -102,17 +104,34 @@ export default function ProjectsPage() {
                     </div>
                   </div>
 
-                  {project.demoUrl && (
-                    <div className="mt-6 pt-6 border-t border-border">
-                      <Link
-                        href={project.demoUrl}
-                        className="inline-flex items-center gap-2 border border-accent text-accent rounded-lg px-5 py-2.5 font-mono text-sm hover:bg-accent hover:text-bg transition-all duration-300"
-                      >
-                        View Interactive Demo
-                        <span className="text-xs">&#x2192;</span>
-                      </Link>
+                  {(project.demoUrl || project.announcements) && (
+                    <div className="mt-6 pt-6 border-t border-border flex flex-wrap items-center gap-4">
+                      {project.demoUrl && (
+                        <Link
+                          href={project.demoUrl}
+                          className="inline-flex items-center gap-2 border border-accent text-accent rounded-lg px-5 py-2.5 font-mono text-sm hover:bg-accent hover:text-bg transition-all duration-300"
+                        >
+                          View Interactive Demo
+                          <span className="text-xs">&#x2192;</span>
+                        </Link>
+                      )}
+                      {project.announcements?.map((a) => (
+                        <a
+                          key={a.url}
+                          href={a.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 font-mono text-xs text-fg-dim hover:text-accent transition-colors"
+                        >
+                          {a.label}
+                        </a>
+                      ))}
                     </div>
                   )}
+
+                  <p className="mt-6 pt-4 border-t border-border/60 font-mono text-[10px] text-fg-dim/60 tracking-wide">
+                    {"// built with AI coding agents"}
+                  </p>
                 </div>
               </article>
             </ScrollReveal>

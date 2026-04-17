@@ -13,33 +13,32 @@ interface ResumeCard {
   accent: string;
 }
 
-const allResumes: ResumeCard[] = [
-  {
+// All three PDFs ship in /public, but each site only surfaces its own.
+const RESUMES: Record<VariantKey, ResumeCard> = {
+  cybersec: {
     key: "cybersec",
     href: "/cj-clark-resume-cybersec.pdf",
     title: "Cybersecurity Engineer",
-    body: "SOC and SIEM depth, threat intel, DLP across four platforms, phishing program ownership, incident response and on-call.",
+    body: "SOC and SIEM depth, threat intel pipelines, DLP across four platforms, phishing-program ownership, detection engineering, incident response and on-call.",
     accent: "bg-[#cdff64]",
   },
-  {
+  prodsec: {
     key: "prodsec",
     href: "/cj-clark-resume-prodsec.pdf",
     title: "Product Security Engineer",
-    body: "Secure SDLC, security-required PR reviews, vulnerability management, AppSec tooling (Wiz, ArmorCode), Jira-driven remediation.",
+    body: "Secure SDLC, security-required PR reviews, vulnerability management, AppSec tooling (Wiz, ArmorCode), AWS cloud security, Jira-driven remediation.",
     accent: "bg-emerald-400",
   },
-  {
+  "ai-swe": {
     key: "ai-swe",
     href: "/cj-clark-resume-ai-swe.pdf",
     title: "AI Software Engineer",
-    body: "AI-augmented development since 2022, production tools shipped with Anthropic and OpenRouter APIs, custom MCP servers, a 24/7 Claude Code harness.",
+    body: "AI-augmented development since 2022, production tools shipped with Anthropic and OpenRouter APIs, custom MCP servers, a 24/7 Claude Code harness with scheduled autonomous tasks.",
     accent: "bg-fuchsia-400",
   },
-];
+};
 
-// Feature the matching resume first, others underneath.
-const matching = allResumes.find((r) => r.key === activeVariant.key)!;
-const others = allResumes.filter((r) => r.key !== activeVariant.key);
+const resume = RESUMES[activeVariant.key];
 
 export default function ResumePage() {
   return (
@@ -57,84 +56,36 @@ export default function ResumePage() {
             Resume
           </h1>
           <p className="text-fg-dim text-lg max-w-2xl mt-4 font-body">
-            Three variants of the same story, each tuned for a different
-            role-type and keyword set. Pick whichever matches the job you
-            have in hand.
+            Targeted for {resume.title} roles — same facts as the other
+            versions of my site, ordered and keyword-weighted for this
+            role-type.
           </p>
         </header>
 
-        <div className="space-y-6">
-          {/* Matching variant — featured */}
-          <a
-            key={matching.href}
-            href={matching.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block bg-bg-surface border-2 border-accent/40 rounded-xl overflow-hidden glow-card"
-          >
-            <div className={`h-1.5 ${matching.accent}`} />
-            <div className="p-7 flex flex-col sm:flex-row sm:items-center gap-6 sm:justify-between">
-              <div>
-                <p className="font-mono text-[11px] text-accent tracking-wider mb-1">
-                  {"// recommended for this site"}
-                </p>
-                <h2 className="font-display text-2xl font-bold text-fg group-hover:text-accent transition-colors">
-                  {matching.title}
-                </h2>
-                <p className="text-fg-dim text-sm leading-relaxed mt-2 max-w-2xl">
-                  {matching.body}
-                </p>
-              </div>
-              <div className="shrink-0">
-                <span className="inline-flex items-center gap-2 border border-accent bg-accent/10 text-accent rounded-lg px-5 py-2.5 font-mono text-sm group-hover:bg-accent group-hover:text-bg transition-all duration-300">
-                  Download PDF
-                  <span className="text-xs">&#x2193;</span>
-                </span>
-              </div>
+        <a
+          href={resume.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block bg-bg-surface border-2 border-accent/40 rounded-xl overflow-hidden glow-card"
+        >
+          <div className={`h-1.5 ${resume.accent}`} />
+          <div className="p-7 flex flex-col sm:flex-row sm:items-center gap-6 sm:justify-between">
+            <div>
+              <h2 className="font-display text-2xl font-bold text-fg group-hover:text-accent transition-colors">
+                {resume.title}
+              </h2>
+              <p className="text-fg-dim text-sm leading-relaxed mt-2 max-w-2xl">
+                {resume.body}
+              </p>
             </div>
-          </a>
-
-          <div className="pt-4">
-            <p className="font-mono text-xs text-fg-dim/60 tracking-wider mb-4 uppercase">
-              {"// other variants"}
-            </p>
-            <div className="space-y-4">
-              {others.map((v) => (
-                <a
-                  key={v.href}
-                  href={v.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block bg-bg-surface border border-border rounded-xl overflow-hidden glow-card"
-                >
-                  <div className={`h-1 ${v.accent}`} />
-                  <div className="p-7 flex flex-col sm:flex-row sm:items-center gap-6 sm:justify-between">
-                    <div>
-                      <h2 className="font-display text-xl font-bold text-fg group-hover:text-accent transition-colors">
-                        {v.title}
-                      </h2>
-                      <p className="text-fg-dim text-sm leading-relaxed mt-2 max-w-2xl">
-                        {v.body}
-                      </p>
-                    </div>
-                    <div className="shrink-0">
-                      <span className="inline-flex items-center gap-2 border border-border text-fg-dim rounded-lg px-5 py-2.5 font-mono text-sm group-hover:border-accent group-hover:text-accent transition-all duration-300">
-                        Download PDF
-                        <span className="text-xs">&#x2193;</span>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              ))}
+            <div className="shrink-0">
+              <span className="inline-flex items-center gap-2 border border-accent bg-accent/10 text-accent rounded-lg px-5 py-2.5 font-mono text-sm group-hover:bg-accent group-hover:text-bg transition-all duration-300">
+                Download PDF
+                <span className="text-xs">&#x2193;</span>
+              </span>
             </div>
           </div>
-        </div>
-
-        <p className="mt-10 text-fg-dim/70 text-xs font-mono">
-          {
-            "// same facts in every variant — only the ordering and keyword emphasis change"
-          }
-        </p>
+        </a>
 
         <footer className="mt-16 text-center pb-8">
           <Link

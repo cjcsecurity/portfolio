@@ -140,7 +140,9 @@ export const VARIANTS: Record<VariantKey, Variant> = {
 };
 
 export function getVariant(): Variant {
-  const raw = process.env.NEXT_PUBLIC_SITE_VARIANT;
+  // .trim() defends against trailing whitespace the Vercel CLI bakes in
+  // when the env value is added via stdin pipe (printf "x\n" | vercel env add).
+  const raw = process.env.NEXT_PUBLIC_SITE_VARIANT?.trim();
   if (raw === "prodsec" || raw === "ai-swe" || raw === "cybersec") {
     return VARIANTS[raw];
   }

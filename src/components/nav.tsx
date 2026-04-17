@@ -4,8 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 
 // NEXT_PUBLIC_* is inlined at build time, so this reads the active variant
-// baked into each deployment.
-const showHowIWork = process.env.NEXT_PUBLIC_SITE_VARIANT === "ai-swe";
+// baked into each deployment. .trim() defends against trailing whitespace
+// from stdin-piped env adds.
+const showHowIWork =
+  process.env.NEXT_PUBLIC_SITE_VARIANT?.trim() === "ai-swe";
 
 const links = [
   { href: "/#about", label: "ABOUT" },

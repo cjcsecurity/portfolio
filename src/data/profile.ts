@@ -8,11 +8,11 @@ export const profile = {
     "Most of my day-to-day is automating things that used to be manual: threat intel pipelines, vulnerability reporting, access reviews, phishing campaigns. If a security process involves copying and pasting between three tabs, I'd rather write something that does it in one click.",
     "I'm also the go-to person at my company for AI. I advise leadership on what tools are worth adopting, help engineering teams get started with AI coding agents, and wrote our AI usage policy.",
   ],
-  email: "cj@example.com",
-  // Add your real links here
+  email: "christianjclark92@gmail.com",
+  location: "Colorado Springs, CO",
   links: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/staycold666",
+    linkedin: "https://linkedin.com/in/christianclark-9b9606204",
   },
 } as const;
 
@@ -27,7 +27,7 @@ export const experience: Job[] = [
   {
     company: "Snapdocs",
     title: "Product Security Engineer",
-    period: "Current",
+    period: "2025 — Present",
     highlights: [
       "Review GitHub PRs as the security team representative — security approval required before merge, focusing on authN/authZ, secrets handling, input validation, logging, and data exposure",
       "Produce and automate monthly vulnerability remediation reports tracking tickets per engineering team, SLA compliance, and open items",
@@ -39,7 +39,7 @@ export const experience: Job[] = [
   {
     company: "Snapdocs",
     title: "Cybersecurity Engineer",
-    period: "Previous",
+    period: "Apr 2024 — 2025",
     highlights: [
       "Built internal threat intel pipeline: AlienVault OTX → IoC extraction → Splunk query generation → AI-written environmental impact reports auto-created as Jira tickets",
       "Created web app for Kandji Mac app governance — inventories installed apps, auto-flags malicious or non-work software, generates reports, one-click app blocking",
@@ -59,7 +59,7 @@ export const experience: Job[] = [
   {
     company: "Snapdocs",
     title: "Senior System Administrator",
-    period: "Previous",
+    period: "Jul 2023 — Oct 2024",
     highlights: [
       "Overhauled onboarding workflow, cutting manual tasks by ~80%",
       "Created automated offboarding pipeline — immediate revocation from all critical systems triggered by a Jira ticket",
@@ -75,7 +75,7 @@ export const experience: Job[] = [
   {
     company: "OrthoFi",
     title: "Systems Administrator",
-    period: "Previous",
+    period: "Apr 2022 — Jul 2023",
     highlights: [
       "Developed automation scripts with Python and PowerShell",
       "Administered hundreds of systems across Windows, macOS, iOS, and Linux",
@@ -87,7 +87,7 @@ export const experience: Job[] = [
   {
     company: "48 Hour Monogram",
     title: "E-commerce Operations Specialist",
-    period: "Previous",
+    period: "Aug 2018 — Jan 2022",
     highlights: [
       "Developed and managed a Shopify e-commerce platform",
       "Built Python web scraping scripts for competitive market data and automation",
@@ -304,4 +304,26 @@ export const projects: Project[] = [
     category: "ml-project",
     demoUrl: "/demos/pacman-ml",
   },
+];
+
+export interface Education {
+  school: string;
+  degree: string;
+}
+
+export const education: Education[] = [
+  {
+    school: "Colorado State University",
+    degree: "B.S., Information Technology",
+  },
+  {
+    school: "Red Rocks Community College",
+    degree: "A.S., Precision Machining",
+  },
+];
+
+export const certifications: string[] = [
+  "CompTIA Network+",
+  "CompTIA A+",
+  "Google IT Automation with Python (Professional Certificate)",
 ];

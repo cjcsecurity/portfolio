@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { profile, experience, skills } from "@/data/profile";
+import {
+  profile,
+  experience,
+  skills,
+  education,
+  certifications,
+} from "@/data/profile";
 import type { Job, Skill } from "@/data/profile";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -212,6 +218,52 @@ export default function Home() {
           {skills.map((skill, i) => (
             <SkillCategory key={skill.category} skill={skill} index={i} />
           ))}
+        </div>
+      </section>
+
+      {/* ── Education & Certifications ────────────── */}
+      <section id="education" className="py-24 max-w-6xl mx-auto px-6">
+        <ScrollReveal>
+          <SectionHeading>Education &amp; Certifications</SectionHeading>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
+          <div className="md:col-span-2 space-y-6">
+            <ScrollReveal delay={100}>
+              <h3 className="font-display text-sm font-bold text-fg uppercase tracking-wider mb-4">
+                Education
+              </h3>
+            </ScrollReveal>
+            {education.map((ed, i) => (
+              <ScrollReveal key={ed.school} delay={150 + i * 100}>
+                <div className="bg-bg-surface border border-border rounded-xl p-5 glow-card">
+                  <p className="font-display text-lg font-bold text-fg">
+                    {ed.school}
+                  </p>
+                  <p className="font-mono text-accent-dim text-sm mt-1">
+                    {ed.degree}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <div className="md:col-span-3">
+            <ScrollReveal delay={100}>
+              <h3 className="font-display text-sm font-bold text-fg uppercase tracking-wider mb-4">
+                Certifications
+              </h3>
+            </ScrollReveal>
+            <div className="flex flex-wrap gap-2">
+              {certifications.map((cert, i) => (
+                <ScrollReveal key={cert} delay={150 + i * 80}>
+                  <span className="bg-bg-surface border border-border rounded-full px-4 py-1.5 text-xs font-mono text-fg-dim hover:border-accent-dim hover:text-accent transition-all duration-300">
+                    {cert}
+                  </span>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

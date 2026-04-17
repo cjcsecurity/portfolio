@@ -1,4 +1,8 @@
-import pkg from "/home/staycold66/projects/mission-control/node_modules/playwright-core/index.js";
+// Generates the three resume PDFs at public/cj-clark-resume-*.pdf.
+// Usage: `node scripts/generate-resumes.mjs`
+// Requires `playwright-core` on the resolution path and a chromium binary,
+// either found automatically or provided via PLAYWRIGHT_CHROMIUM_EXECUTABLE.
+import pkg from "playwright-core";
 const { chromium } = pkg;
 import { writeFileSync } from "fs";
 
@@ -317,7 +321,9 @@ function buildHTML(v) {
 // ────────────────────────── render ──────────────────────────
 
 const browser = await chromium.launch({
-  executablePath: "/home/staycold66/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome",
+  executablePath:
+    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ||
+    "/home/staycold66/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome",
   headless: true,
 });
 

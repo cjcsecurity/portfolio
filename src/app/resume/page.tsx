@@ -39,11 +39,14 @@ const RESUMES: Record<VariantKey, ResumeCard> = {
 };
 
 const resume = RESUMES[activeVariant.key];
+const others = (Object.keys(RESUMES) as VariantKey[])
+  .filter((k) => k !== activeVariant.key)
+  .map((k) => RESUMES[k]);
 
 export default function ResumePage() {
   return (
     <main className="grid-bg min-h-screen">
-      <div className="max-w-4xl mx-auto px-6 pt-28 pb-20">
+      <div className="max-w-6xl mx-auto px-6 pt-28 pb-20">
         <Link
           href="/"
           className="font-mono text-xs text-fg-dim hover:text-accent transition-colors"
@@ -66,9 +69,11 @@ export default function ResumePage() {
           href={resume.href}
           target="_blank"
           rel="noopener noreferrer"
+          aria-current="page"
+          aria-label={`Download ${resume.title} resume PDF`}
           className="group block bg-bg-surface border-2 border-accent/40 rounded-xl overflow-hidden glow-card"
         >
-          <div className={`h-1.5 ${resume.accent}`} />
+          <div className={`h-px ${resume.accent}`} />
           <div className="p-7 flex flex-col sm:flex-row sm:items-center gap-6 sm:justify-between">
             <div>
               <h2 className="font-display text-2xl font-bold text-fg group-hover:text-accent transition-colors">
@@ -86,6 +91,39 @@ export default function ResumePage() {
             </div>
           </div>
         </a>
+
+        <div className="mt-10">
+          <p className="font-mono text-[11px] text-fg-dim/70 tracking-[0.18em] uppercase mb-4">
+            // also available
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {others.map((r) => (
+              <a
+                key={r.key}
+                href={r.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Download ${r.title} resume PDF`}
+                className="group flex items-center justify-between gap-4 bg-bg-surface border border-border rounded-lg p-4 hover:border-accent-dim transition-colors"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className={`h-8 w-px ${r.accent} shrink-0`} aria-hidden />
+                  <div className="min-w-0">
+                    <p className="font-display text-base font-bold text-fg group-hover:text-accent transition-colors truncate">
+                      {r.title}
+                    </p>
+                    <p className="font-mono text-[11px] text-fg-dim mt-1">
+                      Download PDF
+                    </p>
+                  </div>
+                </div>
+                <span className="font-mono text-fg-dim group-hover:text-accent transition-colors text-lg shrink-0">
+                  &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
 
         <footer className="mt-16 text-center pb-8">
           <Link

@@ -25,13 +25,35 @@ const orderedSkills: Skill[] = [
 
 /* ── Helper components ─────────────────────────────── */
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return <h2 className="section-heading mb-12">{children}</h2>;
+function SectionHeading({
+  kicker,
+  title,
+  index,
+  total,
+}: {
+  kicker: string;
+  title: string;
+  index: number;
+  total: number;
+}) {
+  const padded = String(index).padStart(2, "0");
+  const totalPadded = String(total).padStart(2, "0");
+  return (
+    <div className="section-heading-block">
+      <p className="section-kicker">
+        <span className="section-kicker-index" aria-hidden>
+          {padded} / {totalPadded}
+        </span>
+        <span>{kicker}</span>
+      </p>
+      <h2 className="section-title">{title}</h2>
+    </div>
+  );
 }
 
 function JobCard({ job, index }: { job: Job; index: number }) {
   return (
-    <ScrollReveal delay={index * 120}>
+    <ScrollReveal delay={Math.min(index * 120, 400)}>
       <div className="relative pl-8 border-l-2 border-border">
         {/* accent dot */}
         <span className="absolute -left-[7px] top-0 size-3 rounded-full bg-accent-dim border-2 border-bg" />
@@ -53,9 +75,13 @@ function JobCard({ job, index }: { job: Job; index: number }) {
             {job.highlights.map((highlight, i) => (
               <li
                 key={i}
-                className="text-fg-dim text-sm leading-relaxed pl-5 relative before:content-['▹'] before:absolute before:left-0 before:text-accent-dim"
+                className="text-fg-dim text-sm leading-relaxed flex items-start gap-2.5"
               >
-                {highlight}
+                <span
+                  className="bg-accent shrink-0 size-1.5 mt-2"
+                  aria-hidden
+                />
+                <span>{highlight}</span>
               </li>
             ))}
           </ul>
@@ -67,8 +93,8 @@ function JobCard({ job, index }: { job: Job; index: number }) {
 
 function SkillCategory({ skill, index }: { skill: Skill; index: number }) {
   return (
-    <ScrollReveal delay={index * 100}>
-      <div>
+    <ScrollReveal delay={Math.min(index * 100, 400)}>
+      <div className="break-inside-avoid mb-10">
         <h3 className="font-display text-sm font-bold text-fg uppercase tracking-wider mb-4">
           {skill.category}
         </h3>
@@ -92,6 +118,26 @@ function SkillCategory({ skill, index }: { skill: Skill; index: number }) {
 export default function Home() {
   const [firstName, lastName] = profile.name.split(" ");
 
+  // Section index/total — How I Work only renders on the AI-SWE variant, so
+  // the count varies. About → Experience → Skills → Credentials is shared.
+  const sections = variant.showHowIWork
+    ? [
+        { id: "about", kicker: "// about", title: "Background" },
+        { id: "how-i-work", kicker: "// how I work", title: "AI-augmented engineering" },
+        { id: "experience", kicker: "// experience", title: "Where I've shipped" },
+        { id: "skills", kicker: "// skills", title: "What I reach for" },
+        { id: "education", kicker: "// credentials", title: "Education & certifications" },
+      ]
+    : [
+        { id: "about", kicker: "// about", title: "Background" },
+        { id: "experience", kicker: "// experience", title: "Where I've shipped" },
+        { id: "skills", kicker: "// skills", title: "What I reach for" },
+        { id: "education", kicker: "// credentials", title: "Education & certifications" },
+      ];
+  const total = sections.length;
+  const idx = (id: string) => sections.findIndex((s) => s.id === id) + 1;
+  const sec = (id: string) => sections.find((s) => s.id === id)!;
+
   return (
     <main>
       {/* ── Hero ──────────────────────────────────── */}
@@ -107,7 +153,9 @@ export default function Home() {
             className="font-mono text-accent text-2xl mb-4 animate-text-reveal"
             style={{ animationDelay: "150ms" }}
           >
-            {">"}_<span className="animate-blink">|</span>
+            <span className="hero-cursor">
+              {">"}_<span className="animate-blink">|</span>
+            </span>
           </p>
 
           {/* name */}
@@ -179,7 +227,7 @@ export default function Home() {
         </div>
 
         {/* scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-fg-dim text-sm animate-bounce">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-fg-dim text-sm animate-bounce">
           <span className="font-mono text-xs">scroll</span>
           <span>↓</span>
         </div>
@@ -188,7 +236,12 @@ export default function Home() {
       {/* ── About ─────────────────────────────────── */}
       <section id="about" className="py-24 max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <SectionHeading>About</SectionHeading>
+          <SectionHeading
+            kicker={sec("about").kicker}
+            title={sec("about").title}
+            index={idx("about")}
+            total={total}
+          />
         </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
@@ -196,7 +249,7 @@ export default function Home() {
           <div className="md:col-span-2">
             <ScrollReveal delay={100}>
               <blockquote className="accent-line pl-6">
-                <p className="font-display text-2xl text-fg leading-snug">
+                <p className="font-display italic text-[2rem] text-fg leading-snug">
                   &ldquo;I focus on making the secure path the easiest
                   path.&rdquo;
                 </p>
@@ -219,7 +272,12 @@ export default function Home() {
       {variant.showHowIWork && (
         <section id="how-i-work" className="py-24 max-w-6xl mx-auto px-6">
           <ScrollReveal>
-            <SectionHeading>How I Work</SectionHeading>
+            <SectionHeading
+              kicker={sec("how-i-work").kicker}
+              title={sec("how-i-work").title}
+              index={idx("how-i-work")}
+              total={total}
+            />
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
@@ -252,7 +310,12 @@ export default function Home() {
       {/* ── Experience ────────────────────────────── */}
       <section id="experience" className="py-24 max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <SectionHeading>Experience</SectionHeading>
+          <SectionHeading
+            kicker={sec("experience").kicker}
+            title={sec("experience").title}
+            index={idx("experience")}
+            total={total}
+          />
         </ScrollReveal>
 
         <div className="space-y-8">
@@ -265,10 +328,15 @@ export default function Home() {
       {/* ── Skills ────────────────────────────────── */}
       <section id="skills" className="py-24 max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <SectionHeading>Skills</SectionHeading>
+          <SectionHeading
+            kicker={sec("skills").kicker}
+            title={sec("skills").title}
+            index={idx("skills")}
+            total={total}
+          />
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-10">
           {orderedSkills.map((skill, i) => (
             <SkillCategory key={skill.category} skill={skill} index={i} />
           ))}
@@ -278,7 +346,12 @@ export default function Home() {
       {/* ── Education & Certifications ────────────── */}
       <section id="education" className="py-24 max-w-6xl mx-auto px-6">
         <ScrollReveal>
-          <SectionHeading>Education &amp; Certifications</SectionHeading>
+          <SectionHeading
+            kicker={sec("education").kicker}
+            title={sec("education").title}
+            index={idx("education")}
+            total={total}
+          />
         </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
@@ -310,7 +383,7 @@ export default function Home() {
             </ScrollReveal>
             <div className="flex flex-wrap gap-2">
               {certifications.map((cert, i) => (
-                <ScrollReveal key={cert} delay={150 + i * 80}>
+                <ScrollReveal key={cert} delay={150 + Math.min(i * 80, 250)}>
                   <span className="bg-bg-surface border border-border rounded-full px-4 py-1.5 text-xs font-mono text-fg-dim hover:border-accent-dim hover:text-accent transition-all duration-300">
                     {cert}
                   </span>
@@ -366,9 +439,9 @@ export default function Home() {
               <span key={link.url}>
                 <a
                   href={link.url}
-                  className="hover:text-accent transition-colors underline underline-offset-2 decoration-dotted"
+                  className="text-fg-dim hover:text-accent transition-colors"
                 >
-                  {link.label}
+                  {link.label} <span aria-hidden>&rarr;</span>
                 </a>
                 {i < variant.crossLinks.length - 1 && (
                   <span className="text-fg-dim/30">{" · "}</span>
